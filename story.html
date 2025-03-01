@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - The Underscore Collective</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: black;
+            color: lime;
+            margin: 20px;
+            line-height: 1.6;
+            white-space: pre-wrap; /* Allows text to wrap */
+        }
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            border-right: .15em solid lime; /* Cursor */
+            white-space: pre-wrap; /* Allows text to wrap */
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: lime }
+        }
+    </style>
+</head>
+<body>
+    <div class="typewriter" id="typewriter"></div>
+
+    <script>
+        const sentences = [
+            "We create products and services that help financial services and cryptoasset businesses thrive whilst protecting consumers.",
+            "Our businesses merge humans and technology to aggregate information, condense it into clear messaging and distribute it in to the UK consumer market.",
+            "Operating a business in the financial services sector isn’t easy. Firms are spending more than ever on understanding regulations and then trying to comply with them. And with more financial products being built for global distribution, the complexity of interacting with multiple regulatory regimes only multiplies that challenge.",
+            "We believe that firms need better to access information and data on financial products. They need it delivered to them in a way that’s easy to digest. And they need to be able to use that information to better market their own products and services into a consumer market that is saturated by documents and marketing materials that are too long, too jargon-filled and, as a result, never get read.",
+            "Firms need help. And they need it from people who have been at the coal-face before. Not just people with a superficial level of knowledge.",
+            "We have brought together lawyers, c-suite executives, regulators, academics and policy makers to carefully cultivate our businesses. And because of that we can use our networks and hard-earned experience to help our clients.",
+            "Whether you want to issue financial promotions in the UK, perform due diligence and ongoing monitoring on financial products, or influence regulatory policy, we have a team, product or service that can help.",
+            "The _____ Collective is a holding company that creates, grows and buys financial services businesses.",
+            "We look for businesses that improve customer experiences or better customer outcomes.",
+            "We were started by Wayne Green, Gareth Malna and Giles Swan, who have worked in financial services for decades, grown businesses and advised countless others."
+        ];
+
+        let currentSentence = 0;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function typeSentence() {
+            if (currentSentence < sentences.length) {
+                const sentence = sentences[currentSentence];
+                let charIndex = 0;
+
+                function typeChar() {
+                    if (charIndex < sentence.length) {
+                        typewriterElement.textContent += sentence.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeChar, 50); // Adjust typing speed here
+                    } else {
+                        typewriterElement.textContent += ' '; // Add space after each sentence
+                        currentSentence++;
+                        setTimeout(typeSentence, 500); // Adjust delay between sentences here
+                    }
+                }
+
+                typeChar();
+            } else {
+                setTimeout(() => {
+                    typewriterElement.innerHTML += '<br><a href="index.html" style="color: lime; text-decoration: none;">Back?</a>';
+                    typewriterElement.style.borderRight = '.15em solid lime'; // Keep cursor blinking
+                }, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', typeSentence);
+    </script>
+</body>
+</html>

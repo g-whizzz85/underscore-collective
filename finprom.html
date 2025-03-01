@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinProm - The Underscore Collective</title>
+    <style>
+        @font-face {
+            font-family: 'Thunderbold Serif';
+            src: url('fonts/Thunderbold Serif.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black; /* Changed background color to black */
+            font-family: 'Thunderbold Serif', Arial, sans-serif; /* Changed font family to Thunderbold Serif */
+            font-size: 150px;
+            font-weight: normal;
+            color: white; /* Changed text color to white for visibility */
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.5s; /* Transition for background color */
+        }
+        .line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px; /* Thin line */
+            height: 0; /* Initial height set to 0 */
+            background-color: white; /* White color */
+            transform: translateX(-50%);
+            animation: drawLine 2s forwards; /* Animation to draw the line */
+        }
+        @keyframes drawLine {
+            to {
+                height: 100vh; /* Final height set to 100% of the viewport height */
+            }
+        }
+        .text {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            text-align: center;
+            font-size: 10vw; /* Adjust font size to fit the available space */
+            opacity: 0;
+            animation: fadeIn 2s forwards 2s; /* Delay the fade-in animation to start after the line is drawn */
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .zoom {
+            animation: zoomIn 2s forwards; /* Increased duration to 2 seconds */
+        }
+        @keyframes zoomIn {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(50);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="line"></div>
+    <div class="text left"><a href="https://www.englebert.xyz" id="cryptoLink" style="color: white; text-decoration: none;">CRYPTO</a></div>
+    <div class="text right"><a href="https://www.fundscollective.uk" id="fundsLink" style="color: white; text-decoration: none;">FUNDS</a></div>
+
+    <script>
+        const cryptoLink = document.getElementById('cryptoLink');
+        const fundsLink = document.getElementById('fundsLink');
+
+        cryptoLink.addEventListener('mouseover', () => {
+            document.body.style.backgroundColor = '#443558'; // Purple color on hover
+        });
+        cryptoLink.addEventListener('mouseout', () => {
+            document.body.style.backgroundColor = 'black'; // Change back to black when not hovering
+        });
+
+        fundsLink.addEventListener('mouseover', () => {
+            document.body.style.backgroundColor = '#869ae4'; // Blue color on hover
+        });
+        fundsLink.addEventListener('mouseout', () => {
+            document.body.style.backgroundColor = 'black'; // Change back to black when not hovering
+        });
+
+        // Zoom in effect on click
+        function zoomIn(event, link) {
+            event.preventDefault();
+            const zoomContainer = document.createElement('div');
+            zoomContainer.className = 'zoom';
+            zoomContainer.style.position = 'absolute';
+            zoomContainer.style.top = '50%';
+            zoomContainer.style.left = '50%';
+            zoomContainer.style.transform = 'translate(-50%, -50%)';
+            zoomContainer.style.fontSize = '10vw';
+            zoomContainer.style.color = 'white';
+            zoomContainer.style.zIndex = '1000';
+            zoomContainer.textContent = link.textContent;
+            document.body.appendChild(zoomContainer);
+            document.body.style.backgroundColor = 'white';
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 2000); // Adjust the timeout duration to match the animation duration
+        }
+
+        cryptoLink.addEventListener('click', (event) => zoomIn(event, cryptoLink));
+        fundsLink.addEventListener('click', (event) => zoomIn(event, fundsLink));
+    </script>
+</body>
+</html>
