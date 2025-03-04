@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Underscore Collective</title>
     <style>
         body {
@@ -19,54 +20,71 @@
             overflow: hidden;
             transition: background-color 1s ease;
         }
+
         .container {
             display: flex;
             align-items: center;
-            gap: 10px; /* Reduced gap */
+            gap: 10px;
+            /* Reduced gap */
         }
+
         .scroll-menu {
-            width: 480px; /* Increased width to fit the largest option */
-            height: 110px; /* Adjusted height to match the font size */
+            width: 480px;
+            height: 110px;
             text-align: center;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            white-space: nowrap; /* Prevents words from wrapping */
+            white-space: nowrap;
             position: relative;
-            border-bottom: 2px solid black; /* Added black line */
+            border-bottom: 2px solid black;
+            perspective: 1000px;
+            /* Added for 3D effect */
+            transform-style: preserve-3d;
+            /* Added for 3D effect */
         }
+
         .scroll-menu span {
             display: block;
             position: absolute;
             transition: transform 0.5s ease;
         }
+
         .zoom {
-            animation: zoomIn 2s forwards; /* Increased duration to 2 seconds */
+            animation: zoomIn 2s forwards;
+            /* Increased duration to 2 seconds */
         }
+
         @keyframes zoomIn {
             0% {
                 transform: scale(1);
             }
+
             100% {
                 transform: scale(50);
             }
         }
+
         .circle-button {
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 20px; /* Smaller size */
-            height: 20px; /* Smaller size */
+            width: 20px;
+            /* Smaller size */
+            height: 20px;
+            /* Smaller size */
             background-color: black;
             border-radius: 50%;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .circle-button:hover {
             background-color: gray;
         }
+
         footer {
             position: absolute;
             bottom: 10px;
@@ -74,10 +92,14 @@
             text-align: center;
             font-size: 14px;
         }
+
         footer a {
-            color: black; /* Set link color to black */
-            text-decoration: none; /* Remove underline */
+            color: black;
+            /* Set link color to black */
+            text-decoration: none;
+            /* Remove underline */
         }
+
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -86,18 +108,22 @@
             color: white;
             text-align: center;
             padding: 10px;
-            font-size: 14px; /* Same size as the Privacy Policy link */
+            font-size: 14px;
+            /* Same size as the Privacy Policy link */
             display: none;
         }
+
         .cookie-banner button {
             background-color: white;
             color: black;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
-            font-size: 14px; /* Same size as the Privacy Policy link */
+            font-size: 14px;
+            /* Same size as the Privacy Policy link */
             margin: 0 5px;
         }
+
         .popup {
             display: none;
             position: fixed;
@@ -109,31 +135,126 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            font-size: 14px; /* Same size as the Privacy Policy link */
+            font-size: 14px;
+            /* Same size as the Privacy Policy link */
             max-height: 80vh;
             overflow-y: auto;
         }
+
         .popup-close {
             position: absolute;
             top: 10px;
             right: 10px;
             cursor: pointer;
         }
+
         .cookie-preferences {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         .cookie-preferences div {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .cookie-preferences label {
             margin-right: 10px;
         }
+
+        /* Add these media queries to the existing CSS */
+        @media screen and (max-width: 1200px) {
+            body {
+                font-size: 48px;
+                /* Reduced font size for mobile */
+            }
+
+            .scroll-menu {
+                width: 270px !important;
+                height: 70px !important;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 991px) {
+            body {
+                font-size: 48px;
+                /* Reduced font size for mobile */
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .scroll-menu {
+                width: 270px !important;
+                height: 70px !important;
+                margin-bottom: 10px;
+            }
+
+            .circle-button {
+                top: 10px;
+                right: 10px;
+                width: 15px;
+                /* Smaller button */
+                height: 15px;
+            }
+
+            /* Adjust cookie banner for mobile */
+            .cookie-banner {
+                padding: 15px 10px;
+                font-size: 12px;
+            }
+
+            .cookie-banner button {
+                display: block;
+                width: 90%;
+                margin: 5px auto;
+                padding: 8px;
+            }
+
+            /* Adjust popup for mobile */
+            .popup {
+                width: 90%;
+                max-height: 70vh;
+                padding: 15px;
+                font-size: 12px;
+            }
+
+            .cookie-preferences div {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 10px;
+            }
+
+            .cookie-preferences select {
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
+
+        /* Additional breakpoint for very small screens */
+        @media screen and (max-width: 767px) {
+            body {
+                font-size: 55px;
+            }
+
+            .scroll-menu {
+                width: 270px !important;
+                height: 70px !important;
+                margin-bottom: 10px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="circle-button" id="storyButton"></div>
     <div class="container" id="zoomContainer">
@@ -149,7 +270,9 @@
     </footer>
 
     <div class="cookie-banner" id="cookieBanner">
-        <p>Select “Accept all” to agree to our use of cookies and similar technologies to enhance your browsing experience, security, analytics and customization. Select ”Manage cookies” to make more choices or opt out.</p>
+        <p>Select “Accept all” to agree to our use of cookies and similar technologies to enhance your browsing
+            experience, security, analytics and customization. Select ”Manage cookies” to make more choices or opt out.
+        </p>
         <button id="acceptCookies">Accept all</button>
         <button id="rejectCookies">Reject all</button>
         <button id="modifyCookies">Manage cookies</button>
@@ -159,12 +282,17 @@
         <span class="popup-close" id="closePopup">&times;</span>
         <h2>Privacy Policy</h2>
         <p>Effective date: March 1, 2025</p>
-        <p>The Underscore Collective Ltd ("us", "we", or "our") operates the www.theunderscorecollective.com website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+        <p>The Underscore Collective Ltd ("us", "we", or "our") operates the www.theunderscorecollective.com website
+            (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of
+            personal data when you use our Service and the choices you have associated with that data.</p>
         <h3>1. Information Collection and Use</h3>
-        <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+        <p>We collect several different types of information for various purposes to provide and improve our Service to
+            you.</p>
         <h4>Types of Data Collected:</h4>
         <p><strong>Personal Data</strong><br>
-        While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+            While using our Service, we may ask you to provide us with certain personally identifiable information that
+            can be used to contact or identify you ("Personal Data"). Personally identifiable information may include,
+            but is not limited to:</p>
         <ul>
             <li>Email address</li>
             <li>First name and last name</li>
@@ -172,7 +300,10 @@
             <li>Cookies and Usage Data</li>
         </ul>
         <p><strong>Usage Data</strong><br>
-        We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g., IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+            We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may
+            include information such as your computer's Internet Protocol address (e.g., IP address), browser type,
+            browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on
+            those pages, unique device identifiers and other diagnostic data.</p>
         <h3>2. Use of Data</h3>
         <p>The Underscore Collective Ltd uses the collected data for various purposes:</p>
         <ul>
@@ -185,10 +316,17 @@
             <li>To detect, prevent and address technical issues</li>
         </ul>
         <h3>3. Transfer of Data</h3>
-        <p>Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p>
-        <p>If you are located outside the United Kingdom and choose to provide information to us, please note that we transfer the data, including Personal Data, to the United Kingdom and process it there.</p>
-        <p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
-        <p>The Underscore Collective Ltd will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+        <p>Your information, including Personal Data, may be transferred to — and maintained on — computers located
+            outside of your state, province, country or other governmental jurisdiction where the data protection laws
+            may differ from those of your jurisdiction.</p>
+        <p>If you are located outside the United Kingdom and choose to provide information to us, please note that we
+            transfer the data, including Personal Data, to the United Kingdom and process it there.</p>
+        <p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement
+            to that transfer.</p>
+        <p>The Underscore Collective Ltd will take all steps reasonably necessary to ensure that your data is treated
+            securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to
+            an organization or a country unless there are adequate controls in place including the security of your data
+            and other personal information.</p>
         <h3>4. Disclosure of Data</h3>
         <p>We may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
@@ -199,22 +337,37 @@
             <li>To protect against legal liability</li>
         </ul>
         <h3>5. Security of Data</h3>
-        <p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+        <p>The security of your data is important to us but remember that no method of transmission over the Internet or
+            method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect
+            your Personal Data, we cannot guarantee its absolute security.</p>
         <h3>6. Service Providers</h3>
-        <p>We may employ third-party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.</p>
-        <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+        <p>We may employ third-party companies and individuals to facilitate our Service ("Service Providers"), to
+            provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our
+            Service is used.</p>
+        <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are
+            obligated not to disclose or use it for any other purpose.</p>
         <h3>7. Links to Other Sites</h3>
-        <p>Our Service may contain links to other sites that are not operated by us. If you click a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
-        <p>We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+        <p>Our Service may contain links to other sites that are not operated by us. If you click a third-party link,
+            you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of
+            every site you visit.</p>
+        <p>We have no control over and assume no responsibility for the content, privacy policies, or practices of any
+            third-party sites or services.</p>
         <h3>8. Children's Privacy</h3>
         <p>Our Service does not address anyone under the age of 18 ("Children").</p>
-        <p>We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>
+        <p>We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a
+            parent or guardian and you are aware that your Child has provided us with Personal Data, please contact us.
+            If we become aware that we have collected Personal Data from children without verification of parental
+            consent, we take steps to remove that information from our servers.</p>
         <h3>9. Changes to This Privacy Policy</h3>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-        <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
-        <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
+            Privacy Policy on this page.</p>
+        <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming
+            effective and update the "effective date" at the top of this Privacy Policy.</p>
+        <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy
+            are effective when they are posted on this page.</p>
         <h3>10. Contact Us</h3>
-        <p>If you have any questions about this Privacy Policy, please contact us by using the contact information we provided on our website.</p>
+        <p>If you have any questions about this Privacy Policy, please contact us by using the contact information we
+            provided on our website.</p>
     </div>
 
     <div class="popup" id="cookiePreferencesPopup">
@@ -246,116 +399,212 @@
     </div>
 
     <script>
+        // Reset state on page load and back navigation
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                document.body.style.backgroundColor = 'white';
+                const zoomContainer = document.getElementById("zoomContainer");
+                if (zoomContainer) {
+                    zoomContainer.classList.remove('zoom');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (sessionStorage.getItem('navigatingAway')) {
+                document.body.style.backgroundColor = 'white';
+                const zoomContainer = document.getElementById("zoomContainer");
+                if (zoomContainer) {
+                    zoomContainer.classList.remove('zoom');
+                }
+                sessionStorage.removeItem('navigatingAway');
+            }
+        });
+
+        //menu scroll
         const options = ["", "FinProm", "Diligence", "Consulting"];
         let currentIndex = 0;
+        let isScrolling = false;
+
+        const scrollMenu = document.getElementById("scrollMenu");
         let menuText = document.getElementById("menuOption");
         menuText.textContent = options[currentIndex];
 
-        let isScrolling = false;
+        const style = document.createElement('style');
+        style.textContent = `
+            .scroll-menu {
+                position: relative;
+                overflow: hidden;
+                perspective: 1000px;
+                height: 110px;
+            }
 
-        // Listen for scroll events on the menu
-        document.getElementById("scrollMenu").addEventListener("wheel", (event) => {
+            .scroll-menu span {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+                backface-visibility: hidden;
+                transform-style: preserve-3d;
+                opacity: 0;
+                left: 0;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .scroll-menu span.active {
+                opacity: 1;
+                transform: translateY(-50%) rotateX(0);
+            }
+
+            .scroll-menu span.entering {
+                opacity: 0;
+                transform: translateY(100%) rotateX(-10deg);
+            }
+
+            .scroll-menu span.leaving {
+                opacity: 0;
+                transform: translateY(-100%) rotateX(10deg);
+            }
+        `;
+        document.head.appendChild(style);
+
+        function animateMenuChange(direction) {
             if (isScrolling) return;
             isScrolling = true;
 
-            event.preventDefault(); // Prevents page scrolling
+            const nextIndex = (currentIndex + direction + options.length) % options.length;
+            const newText = document.createElement("span");
+            newText.textContent = options[nextIndex];
 
-            const scrollThreshold = 40; // Adjust this value to change scroll sensitivity
-
-            if (Math.abs(event.deltaY) < scrollThreshold) {
-                isScrolling = false;
-                return;
-            }
-
-            const previousIndex = currentIndex;
-
-            if (event.deltaY > 0) {
-                // Scroll down - move to the next option
-                currentIndex = (currentIndex + 1) % options.length;
-            } else {
-                // Scroll up - move to the previous option
-                currentIndex = (currentIndex - 1 + options.length) % options.length;
-            }
-
-            const newMenuText = document.createElement("span");
-            newMenuText.textContent = options[currentIndex];
-            newMenuText.style.transform = `translateY(${event.deltaY > 0 ? '100%' : '-100%'})`;
-            document.getElementById("scrollMenu").appendChild(newMenuText);
-
-            requestAnimationFrame(() => {
-                newMenuText.style.transform = 'translateY(0)';
-                menuText.style.transform = `translateY(${event.deltaY > 0 ? '-100%' : '100%'})`;
-            });
+            newText.style.transform = direction > 0 ?
+                'translateY(100%) rotateX(-10deg)' :
+                'translateY(-100%) rotateX(10deg)';
+            newText.style.opacity = '0';
+            scrollMenu.appendChild(newText);
+            menuText.style.opacity = '0';
+            menuText.style.transform = direction > 0 ?
+                'translateY(-100%) rotateX(10deg)' :
+                'translateY(100%) rotateX(-10deg)';
+            menuText.style.transition = 'all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)';
 
             setTimeout(() => {
-                menuText.remove();
-                menuText = newMenuText;
-                isScrolling = false;
-            }, 500); // Adjust the timeout duration as needed
+                newText.style.transition = 'all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)';
+                newText.style.transform = 'translateY(-50%) rotateX(0)';
+                newText.style.opacity = '1';
+
+                setTimeout(() => {
+                    menuText.remove();
+                    menuText = newText;
+                    currentIndex = nextIndex;
+                    isScrolling = false;
+                }, 400);
+            }, 50);
+        }
+
+        requestAnimationFrame(() => {
+            menuText.style.opacity = '1';
+            menuText.style.transform = 'translateY(-50%) rotateX(0)';
         });
 
-        // Make words clickable when they're visible
-        document.getElementById("scrollMenu").addEventListener("click", () => {
+        // Event Listeners
+        scrollMenu.addEventListener("wheel", (event) => {
+            event.preventDefault();
+            const scrollDelta = event.deltaY;
+            const scrollThreshold = 15;
+            if (Math.abs(scrollDelta) < scrollThreshold) return;
+            const direction = scrollDelta > 0 ? 1 : -1;
+            animateMenuChange(direction);
+        }, { passive: false });
+
+        let touchStartY = 0;
+        scrollMenu.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        scrollMenu.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touchDelta = touchStartY - e.touches[0].clientY;
+            if (Math.abs(touchDelta) > 10) {
+                const direction = touchDelta > 0 ? 1 : -1;
+                animateMenuChange(direction);
+                touchStartY = e.touches[0].clientY;
+            }
+        }, { passive: false });
+
+        scrollMenu.addEventListener('touchend', () => {
+            if (isScrolling) {
+                isScrolling = false;
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const direction = e.key === 'ArrowDown' ? 1 : -1;
+                animateMenuChange(direction);
+            }
+        });
+
+        // Updated click handlers with navigation state management
+        scrollMenu.addEventListener("click", () => {
             const links = {
-                "FinProm": "finprom.html", // Replace with actual subdomain
+                "FinProm": "finprom.html",
                 "Diligence": "https://duecue.com",
-                "Consulting": "https://your-consulting-link.com"
+                "Consulting": "coming-soon.html"
             };
 
             if (options[currentIndex] && links[options[currentIndex]]) {
+                sessionStorage.setItem('navigatingAway', 'true');
                 const zoomContainer = document.getElementById("zoomContainer");
                 zoomContainer.classList.add('zoom');
                 document.body.style.backgroundColor = 'black';
+                document.body.style.transition = 'background-color 0.8s ease';
+
                 setTimeout(() => {
                     window.location.href = links[options[currentIndex]];
-                }, 2000); // Adjust the timeout duration to match the animation duration
+                }, 2000);
             }
         });
 
-        // Navigate to story page when the circle button is clicked
         document.getElementById("storyButton").addEventListener("click", () => {
-            window.location.href = "https://www.theunderscorecollective.com/story";
+            sessionStorage.setItem('navigatingAway', 'true');
+            window.location.href = "story.html";
         });
 
-        // Show privacy policy popup
+        // Cookie and Privacy Policy handlers
         document.getElementById("privacyPolicyLink").addEventListener("click", (event) => {
             event.preventDefault();
             document.getElementById("privacyPolicyPopup").style.display = 'block';
         });
 
-        // Close privacy policy popup
         document.getElementById("closePopup").addEventListener("click", () => {
             document.getElementById("privacyPolicyPopup").style.display = 'none';
         });
 
-        // Show cookie banner if not accepted
         if (!localStorage.getItem('cookiesAccepted')) {
             document.getElementById("cookieBanner").style.display = 'block';
         }
 
-        // Accept cookies
         document.getElementById("acceptCookies").addEventListener("click", () => {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById("cookieBanner").style.display = 'none';
         });
 
-        // Reject cookies
         document.getElementById("rejectCookies").addEventListener("click", () => {
             localStorage.setItem('cookiesAccepted', 'false');
             document.getElementById("cookieBanner").style.display = 'none';
         });
 
-        // Show cookie preferences popup
         document.getElementById("modifyCookies").addEventListener("click", () => {
             document.getElementById("cookiePreferencesPopup").style.display = 'block';
         });
 
-        // Close cookie preferences popup
         document.getElementById("closeCookiePreferences").addEventListener("click", () => {
             document.getElementById("cookiePreferencesPopup").style.display = 'none';
         });
 
-        // Save cookie preferences
         document.getElementById("saveCookiePreferences").addEventListener("click", () => {
             const necessaryCookies = document.getElementById("necessaryCookies").value;
             const performanceCookies = document.getElementById("performanceCookies").value;
@@ -370,4 +619,5 @@
         });
     </script>
 </body>
+
 </html>
