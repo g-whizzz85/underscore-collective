@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,36 +12,57 @@
             color: lime;
             margin: 20px;
             line-height: 1.6;
-            white-space: pre-wrap; /* Allows text to wrap */
+            white-space: pre-wrap;
         }
+
         .typewriter {
             display: inline-block;
-            overflow: hidden;
-            border-right: .15em solid lime; /* Cursor */
-            white-space: pre-wrap; /* Allows text to wrap */
+            position: relative;
+            white-space: pre-wrap;
             margin: 0 auto;
             letter-spacing: .15em;
+        }
+
+        .word {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        #cursor {
+            display: inline-block;
+            width: .15em;
+            height: 1.2em;
+            background-color: lime;
+            position: absolute;
+            margin-left: 2px;
             animation: blink-caret .75s step-end infinite;
         }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
+
         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: lime }
+
+            from,
+            to {
+                opacity: 0
+            }
+
+            50% {
+                opacity: 1
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="typewriter" id="typewriter"></div>
+    <div class="typewriter" id="typewriter">
+        <span id="cursor"></span>
+    </div>
 
     <script>
         const sentences = [
             "We create products and services that help financial services and cryptoasset businesses thrive whilst protecting consumers.",
             "Our businesses merge humans and technology to aggregate information, condense it into clear messaging and distribute it in to the UK consumer market.",
-            "Operating a business in the financial services sector isn’t easy. Firms are spending more than ever on understanding regulations and then trying to comply with them. And with more financial products being built for global distribution, the complexity of interacting with multiple regulatory regimes only multiplies that challenge.",
-            "We believe that firms need better to access information and data on financial products. They need it delivered to them in a way that’s easy to digest. And they need to be able to use that information to better market their own products and services into a consumer market that is saturated by documents and marketing materials that are too long, too jargon-filled and, as a result, never get read.",
+            "Operating a business in the financial services sector isn't easy. Firms are spending more than ever on understanding regulations and then trying to comply with them. And with more financial products being built for global distribution, the complexity of interacting with multiple regulatory regimes only multiplies that challenge.",
+            "We believe that firms need better to access information and data on financial products. They need it delivered to them in a way that's easy to digest. And they need to be able to use that information to better market their own products and services into a consumer market that is saturated by documents and marketing materials that are too long, too jargon-filled and, as a result, never get read.",
             "Firms need help. And they need it from people who have been at the coal-face before. Not just people with a superficial level of knowledge.",
             "We have brought together lawyers, c-suite executives, regulators, academics and policy makers to carefully cultivate our businesses. And because of that we can use our networks and hard-earned experience to help our clients.",
             "Whether you want to issue financial promotions in the UK, perform due diligence and ongoing monitoring on financial products, or influence regulatory policy, we have a team, product or service that can help.",
@@ -51,34 +73,69 @@
 
         let currentSentence = 0;
         const typewriterElement = document.getElementById('typewriter');
+        const cursor = document.getElementById('cursor');
+        const WORD_DELAY = 100;
+        const SENTENCE_DELAY = 500;
+
+        function updateCursorPosition() {
+            const lastSpan = typewriterElement.querySelector('span:not(#cursor):last-of-type');
+            if (lastSpan) {
+                const rect = lastSpan.getBoundingClientRect();
+                const containerRect = typewriterElement.getBoundingClientRect();
+                cursor.style.left = (rect.right - containerRect.left) + 'px';
+                cursor.style.top = (rect.top - containerRect.top) + 'px';
+            }
+        }
 
         function typeSentence() {
             if (currentSentence < sentences.length) {
-                const sentence = sentences[currentSentence];
-                let charIndex = 0;
+                const words = sentences[currentSentence].split(' ');
+                let wordIndex = 0;
 
-                function typeChar() {
-                    if (charIndex < sentence.length) {
-                        typewriterElement.textContent += sentence.charAt(charIndex);
-                        charIndex++;
-                        setTimeout(typeChar, 50); // Adjust typing speed here
+                function typeWord() {
+                    if (wordIndex < words.length) {
+                        const span = document.createElement('span');
+                        span.className = 'word';
+                        span.textContent = words[wordIndex] + (wordIndex < words.length - 1 ? ' ' : '');
+                        typewriterElement.insertBefore(span, cursor);
+
+                        requestAnimationFrame(() => {
+                            span.style.opacity = '1';
+                            updateCursorPosition();
+                        });
+
+                        wordIndex++;
+                        setTimeout(typeWord, WORD_DELAY);
                     } else {
-                        typewriterElement.textContent += ' '; // Add space after each sentence
+                        // Add two line breaks instead of one
+                        typewriterElement.insertBefore(document.createElement('br'), cursor);
+                        typewriterElement.insertBefore(document.createElement('br'), cursor);
                         currentSentence++;
-                        setTimeout(typeSentence, 500); // Adjust delay between sentences here
+                        updateCursorPosition();
+                        setTimeout(typeSentence, SENTENCE_DELAY);
                     }
                 }
 
-                typeChar();
+                typeWord();
             } else {
-                setTimeout(() => {
-                    typewriterElement.innerHTML += '<br><a href="index.html" style="color: lime; text-decoration: none;">Back?</a>';
-                    typewriterElement.style.borderRight = '.15em solid lime'; // Keep cursor blinking
-                }, 500);
+                // Add two line breaks before the back link as well
+                typewriterElement.insertBefore(document.createElement('br'), cursor);
+                typewriterElement.insertBefore(document.createElement('br'), cursor);
+
+                const backLink = document.createElement('a');
+                backLink.href = 'index.html';
+                backLink.style.color = 'lime';
+                backLink.style.textDecoration = 'none';
+                backLink.textContent = 'Back?';
+
+                typewriterElement.insertBefore(backLink, cursor);
+                updateCursorPosition();
             }
         }
 
         document.addEventListener('DOMContentLoaded', typeSentence);
+        window.addEventListener('resize', updateCursorPosition);
     </script>
 </body>
+
 </html>
