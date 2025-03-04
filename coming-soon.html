@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon - The Underscore Collective</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    @font-face {
+      font-family: "Thunderbold Serif";
+      src: url("Thunderbold Serif.ttf") format("truetype");
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Thunderbold Serif", Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main {
+      height: 100%;
+    }
+
+    .coming-soon-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .coming-soon-title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    .coming-soon-subtitle {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #666;
+    }
+
+    .coming-soon-message {
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .notify-form {
+      margin: 2rem 0;
+      display: flex;
+      max-width: 500px;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .notify-form input {
+      flex-grow: 1;
+      padding: 15px;
+      border: 2px solid #333;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .notify-form input:focus {
+      outline: none;
+      border-color: #666;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .notify-form button,
+    .back-to-home {
+      padding: 15px 30px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: "Thunderbold Serif", Arial, sans-serif;
+    }
+
+    .notify-form button:hover {
+      background-color: #555;
+      transform: translateY(-2px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 25px;
+      margin-top: 2.5rem;
+    }
+
+    .social-links a {
+      color: #333;
+      font-size: 1.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #555;
+      transform: translateY(-3px);
+    }
+
+    @media screen and (max-width: 768px) {
+      .coming-soon-title {
+        font-size: 3rem;
+      }
+
+      .coming-soon-subtitle {
+        font-size: 1.6rem;
+      }
+
+      .notify-form {
+        flex-direction: column;
+      }
+
+      .notify-form input,
+      .notify-form button {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .coming-soon-container {
+        padding: 0px 10px;
+      }
+
+      .coming-soon-title {
+        font-size: 1.6rem;
+      }
+
+      .coming-soon-subtitle {
+        font-size: 1rem;
+      }
+
+      .coming-soon-message {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="coming-soon-container">
+      <h1 class="coming-soon-title">Consulting_Services</h1>
+      <h2 class="coming-soon-subtitle">Coming Soon</h2>
+
+      <div class="coming-soon-message">
+        <p>
+          Our consulting services page is currently under development. Stay
+          tuned for expert guidance in financial services, regulatory
+          compliance, and strategic business solutions.
+        </p> <br>
+        <a href="index.html" class="back-to-home">Back to Home</a>
+      </div>
+
+      <!-- <form class="notify-form">
+        <input type="email" placeholder="Enter your email for updates" required>
+        <button type="submit">Notify Me</button>
+      </form>
+
+      <div class="social-links">
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>-->
+    </section>
+  </main>
+  <!--
+  <script>
+    const form = document.querySelector('.notify-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input').value;
+      alert('Thank you for your interest! We\'ll notify you when we launch.');
+      form.reset();
+    });
+  </script> -->
+</body>
+
+</html>
